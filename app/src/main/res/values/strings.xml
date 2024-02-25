@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LauncherApp</string>
+    <string name="loading">Загрузка</string>
 </resources>
