@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -78,26 +77,26 @@
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
         tools:text="@string/loading" />
 
-    <ImageButton
+    <com.bignerdranch.android.launcherapp.customView.BounceImage
         android:id="@+id/toTelegramIBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/telegram_icon"
+        android:background="@drawable/circle_telegram_effect"
         android:padding="5dp"
         android:scaleType="centerInside"
-        android:background="@drawable/circle_telegram_effect"/>
+        android:src="@drawable/telegram_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <com.bignerdranch.android.launcherapp.customView.BounceImage
         android:id="@+id/toVkIBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_vk_effect"
+        android:padding="5dp"
+        android:scaleType="centerInside"
         android:src="@drawable/vk_icon"
         app:layout_constraintEnd_toStartOf="@+id/toTelegramIBT"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="5dp"
-        android:background="@drawable/rectangle_vk_effect"
-        android:scaleType="centerInside"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
