@@ -1,8 +1,14 @@
 package com.bignerdranch.android.launcherapp.ui
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.coroutineScope
+import com.bignerdranch.android.launcherapp.R
 import com.bignerdranch.android.launcherapp.common.Constants
 import com.bignerdranch.android.launcherapp.databinding.ActivityLoadingBinding
 import com.bignerdranch.android.launcherapp.utils.openTelegram
@@ -11,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 class LoadingActivity : AppCompatActivity() {
 
@@ -31,12 +38,25 @@ class LoadingActivity : AppCompatActivity() {
     }
 
     private fun clickListeners() {
+        var isTelegramBtn = false
+        val scaleDownAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_down)
+
+        scaleDownAnimation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation) {}
+            override fun onAnimationEnd(animation: Animation) {
+                if(isTelegramBtn) openTelegram() else openVK()
+            }
+            override fun onAnimationRepeat(animation: Animation) {}
+        })
+
         binding.toTelegramIBT.setOnClickListener {
-            openTelegram()
+            isTelegramBtn = true
+            it.startAnimation(scaleDownAnimation)
         }
 
         binding.toVkIBT.setOnClickListener {
-            openVK()
+            isTelegramBtn = false
+            it.startAnimation(scaleDownAnimation)
         }
     }
 

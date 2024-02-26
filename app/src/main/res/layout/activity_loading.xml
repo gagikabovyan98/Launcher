@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -81,18 +82,22 @@
         android:id="@+id/toTelegramIBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
-        android:src="@drawable/telegram_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/telegram_icon"
+        android:padding="5dp"
+        android:scaleType="centerInside"
+        android:background="@drawable/circle_telegram_effect"/>
 
     <ImageButton
         android:id="@+id/toVkIBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
         android:src="@drawable/vk_icon"
         app:layout_constraintEnd_toStartOf="@+id/toTelegramIBT"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="5dp"
+        android:background="@drawable/rectangle_vk_effect"
+        android:scaleType="centerInside"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
