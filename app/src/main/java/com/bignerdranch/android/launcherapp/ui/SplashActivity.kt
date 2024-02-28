@@ -14,7 +14,8 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.splashIV.setOnClickListener {
-            val intentLoading = Intent(this, LoadingActivity::class.java)
+//            val intentLoading = Intent(this, LoadingActivity::class.java)
+            val intentLoading = Intent(this, NotificationActivity::class.java)
             startActivity(intentLoading)
             finish()
         }
