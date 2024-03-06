@@ -45,12 +45,15 @@ class NotificationActivity : AppCompatActivity() {
         val startScaleX = if (isRectangleExpanded) 1f else 0.25f
         val endScaleX = if (isRectangleExpanded) 0.25f else 1f
 
+        val pivotX = if (isRectangleExpanded) 1f else 0f // Установите точку вращения в правом краю при уменьшении размера и в левом при увеличении
+
         return ValueAnimator.ofFloat(startScaleX, endScaleX).apply {
             interpolator = AccelerateDecelerateInterpolator()
             duration = 500
             addUpdateListener {
                 val value = it.animatedValue as Float
                 binding.rectangleLayout.scaleX = value
+                binding.rectangleLayout.pivotX = binding.rectangleLayout.width * pivotX // Установите точку вращения
                 binding.imageButton.translationX = (binding.rectangleLayout.width - binding.imageButton.width) / 2 * (1 - value)
             }
         }
