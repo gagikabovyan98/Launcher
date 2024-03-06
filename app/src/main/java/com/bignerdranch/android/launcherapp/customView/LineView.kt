@@ -22,7 +22,7 @@ class LineView : View {
     }
 
     private fun init() {
-        linePaint.color = 0xFFFF0000.toInt()
+        linePaint.color = 575656.toInt()
         linePaint.strokeWidth = 2f
     }
 

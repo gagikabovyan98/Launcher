@@ -6,7 +6,9 @@
     <dimen name="rect_main_margin">16dp</dimen>
     <dimen name="rect_start_margin">8dp</dimen>
     <dimen name="title_hint_text_size">20sp</dimen>
-    <dimen name="title_hint_bottom">40dp</dimen>
+    <dimen name="title_hint_bottom">35dp</dimen>
     <dimen name="line_view_height">2dp</dimen>
     <dimen name="guide_line_seperator">205dp</dimen>
+    <dimen name="stroke_margin">10dp</dimen>
+    <dimen name="stroke_height">1dp</dimen>
 </resources>
