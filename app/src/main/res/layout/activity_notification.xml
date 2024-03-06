@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,8 +8,9 @@
     tools:context=".ui.NotificationActivity">
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/zero_size"
+        android:layout_height="@dimen/zero_size"
         android:scaleType="centerCrop"
         android:src="@drawable/notification_screen_background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,9 +23,72 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="show popup"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/guide_line_seperator" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/show_hide_action"
+        app:layout_constraintTop_toTopOf="@+id/rectangleLayout"
+        app:layout_constraintStart_toStartOf="@+id/rectangleLayout"/>
+
+    <LinearLayout
+        android:id="@+id/rectangleLayout"
+        android:layout_width="@dimen/rect_width"
+        android:layout_height="@dimen/rect_height"
+        android:layout_marginStart="@dimen/rect_start_margin"
+        android:layout_marginTop="@dimen/rect_main_margin"
+        android:layout_marginEnd="@dimen/rect_main_margin"
+        android:layout_marginBottom="@dimen/rect_main_margin"
+        android:background="@drawable/hint_system_rectange"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.899"
+        app:layout_constraintStart_toEndOf="@id/guidelineVertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.066">
+
+        <TextView
+            android:id="@+id/hint_titleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_hint_text_size"
+            android:text="Text"
+            android:layout_marginBottom="@dimen/title_hint_bottom"/>
+
+        <View
+            android:id="@+id/lineView"
+            android:layout_width="@dimen/zero_size"
+            android:layout_height="@dimen/line_view_height"
+            android:background="@android:color/holo_red_dark"
+            app:layout_constraintStart_toStartOf="@+id/rectangleLayout"
+            app:layout_constraintEnd_toEndOf="@+id/rectangleLayout"
+            app:layout_constraintTop_toTopOf="@+id/rectangleLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/rectangleLayout"
+            app:layout_constraintWidth_percent="0.8"/>
+
+        <TextView
+            android:id="@+id/hint_descrTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Text"
+            android:textColor="@color/black"
+            android:layout_marginBottom="@dimen/title_hint_bottom"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

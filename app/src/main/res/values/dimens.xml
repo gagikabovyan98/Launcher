@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero_size">0dp</dimen>
+    <dimen name="rect_width">114dp</dimen>
+    <dimen name="rect_height">137dp</dimen>
+    <dimen name="rect_main_margin">16dp</dimen>
+    <dimen name="rect_start_margin">8dp</dimen>
+    <dimen name="title_hint_text_size">20sp</dimen>
+    <dimen name="title_hint_bottom">40dp</dimen>
+    <dimen name="line_view_height">2dp</dimen>
+    <dimen name="guide_line_seperator">205dp</dimen>
+</resources>
