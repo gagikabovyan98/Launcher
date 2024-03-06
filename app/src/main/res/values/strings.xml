@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">LauncherApp</string>
     <string name="loading">Загрузка</string>
+
+
+    <string name="system_not_success">Успешно!</string>
+    <string name="system_not_error">Ошибка!</string>
+    <string name="system_not_alert">Предупреждение!</string>
+    <string name="system_not_info">Информация!</string>
+    <string name="system_not_action">Взаимодействие!</string>
 </resources>

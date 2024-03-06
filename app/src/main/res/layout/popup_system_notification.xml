@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@color/black">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <LinearLayout
+        android:id="@+id/textContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_top_rectangle_with_stroke"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingStart="35dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="30dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft">
+
+        <TextView
+            android:id="@+id/titleTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            tools:text="Успешно!"
+            tools:textColor="@color/system_not_success" />
+
+        <TextView
+            android:id="@+id/descriptionTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="2"
+            android:scrollHorizontally="false"
+            android:textColor="@color/white"
+            android:textSize="19sp"
+            tools:text="Уважаемые игроки! Через 15 минут произойдет плановый рестарт сервера!" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/typeImv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rhombus"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textContainer"
+        app:layout_constraintStart_toStartOf="@+id/textContainer"
+        app:layout_constraintTop_toTopOf="@+id/textContainer"
+        tools:backgroundTint="@color/system_not_success"
+        tools:src="@drawable/system_not_success" />
+
+    <FrameLayout
+        android:id="@+id/actionBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/half_transparent_and_stroke_background"
+        android:gravity="center"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textContainer"
+        app:layout_constraintTop_toTopOf="@+id/textContainer">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/system_not_action_btn"
+            app:tint="@color/white" />
+
+    </FrameLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:indicatorColor="@color/system_not_success"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textContainer"
+        app:layout_constraintStart_toStartOf="@+id/textContainer"
+        app:trackColor="#33FFFFFF"
+        app:trackCornerRadius="10dp"
+        app:trackThickness="5dp"
+        tools:progress="10" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

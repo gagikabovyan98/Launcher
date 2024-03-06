@@ -1,80 +1,36 @@
 package com.bignerdranch.android.launcherapp.ui
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
-import com.bignerdranch.android.launcherapp.customView.CustomNotificationPopup
 import com.bignerdranch.android.launcherapp.databinding.ActivityNotificationBinding
+import com.bignerdranch.android.launcherapp.systemNotifications.SystemNotificationPopup
+import com.bignerdranch.android.launcherapp.systemNotifications.SystemNotificationTypes
 
 class NotificationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNotificationBinding
-    private var isRectangleExpanded = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.imageButton.setOnClickListener {
-            val scaleXAnimator = createScaleXAnimator()
-            val rotateAnimator = createRotateAnimator()
+        clickListeners()
+    }
 
-            AnimatorSet().apply {
-                playTogether(scaleXAnimator, rotateAnimator)
-                start()
-            }
-
-            toggleHintVisibility()
-            isRectangleExpanded = !isRectangleExpanded
+    private fun clickListeners() {
+        binding.showPopupBtn.setOnClickListener {
+            showPopup(binding.root)
         }
-    }
-
-    private fun updateUIHintText(hintTitle: String, descrHint: String, titleColor: Int, descrColor: Int) {
-        binding.hintTitleTV.text = hintTitle
-        binding.hintDescrTV.text = descrHint
-        binding.hintTitleTV.setTextColor(getColor(titleColor))
-        binding.hintDescrTV.setTextColor(getColor(descrColor))
-    }
-
-    private fun createScaleXAnimator(): ValueAnimator {
-        val startScaleX = if (isRectangleExpanded) 1f else 0.25f
-        val endScaleX = if (isRectangleExpanded) 0.25f else 1f
-
-        return ValueAnimator.ofFloat(startScaleX, endScaleX).apply {
-            interpolator = AccelerateDecelerateInterpolator()
-            duration = 500
-            addUpdateListener {
-                val value = it.animatedValue as Float
-                binding.rectangleLayout.scaleX = value
-                binding.imageButton.translationX = (binding.rectangleLayout.width - binding.imageButton.width) / 2 * (1 - value)
-            }
-        }
-    }
-
-    private fun createRotateAnimator(): ObjectAnimator {
-        val rotationAngle = if (isRectangleExpanded) 0f else 180f
-
-        return ObjectAnimator.ofFloat(binding.imageButton, "rotation", rotationAngle).apply {
-            interpolator = AccelerateDecelerateInterpolator()
-            duration = 500
-        }
-    }
-
-    private fun toggleHintVisibility() {
-        binding.hintTitleTV.visibility = if (isRectangleExpanded) View.INVISIBLE else View.VISIBLE
-        binding.hintDescrTV.visibility = if (isRectangleExpanded) View.INVISIBLE else View.VISIBLE
     }
 
     private fun showPopup(view: View) {
-        CustomNotificationPopup(
+        SystemNotificationPopup(
             view,
-            title = "Системные уведомления",
-            description = "Здравствуйте! В городе введен режим",
+            type = SystemNotificationTypes.getRegularType(),
+            description = "Уважаемые игроки! Через 15 минут произойдет плановый рестарт сервера!",
+            onActionClicked = {}
         )
     }
 }

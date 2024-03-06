@@ -4,4 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#B9B7B9</color>
     <color name="background_anim">#C4F0F0F0</color>
+
+    <color name="system_not_success">#7BEB78</color>
+    <color name="system_not_error">#EB7878</color>
+    <color name="system_not_alert">#EBCB78</color>
+    <color name="system_not_info">#78DDEB</color>
+    <color name="system_not_action">#8878EB</color>
 </resources>
