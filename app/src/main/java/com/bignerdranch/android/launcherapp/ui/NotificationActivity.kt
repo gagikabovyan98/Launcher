@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.bignerdranch.android.launcherapp.customView.CustomNotificationPopup
 import com.bignerdranch.android.launcherapp.databinding.ActivityNotificationBinding
 
@@ -45,7 +46,7 @@ class NotificationActivity : AppCompatActivity() {
         val startScaleX = if (isRectangleExpanded) 1f else 0.25f
         val endScaleX = if (isRectangleExpanded) 0.25f else 1f
 
-        val pivotX = if (isRectangleExpanded) 1f else 0f // Установите точку вращения в правом краю при уменьшении размера и в левом при увеличении
+        val pivotX = 1f
 
         return ValueAnimator.ofFloat(startScaleX, endScaleX).apply {
             interpolator = AccelerateDecelerateInterpolator()
@@ -53,8 +54,12 @@ class NotificationActivity : AppCompatActivity() {
             addUpdateListener {
                 val value = it.animatedValue as Float
                 binding.rectangleLayout.scaleX = value
-                binding.rectangleLayout.pivotX = binding.rectangleLayout.width * pivotX // Установите точку вращения
-                binding.imageButton.translationX = (binding.rectangleLayout.width - binding.imageButton.width) / 2 * (1 - value)
+                binding.rectangleLayout.pivotX = binding.rectangleLayout.width * pivotX
+
+                // Обновляем позицию кнопки в соответствии с изменяющимся размером квадрата
+                val layoutParams = binding.imageButton.layoutParams as ConstraintLayout.LayoutParams
+                layoutParams.marginStart = ((1 - value) * 30).toInt() // Это только пример, вам может потребоваться другой способ рассчета положения
+                binding.imageButton.layoutParams = layoutParams
             }
         }
     }

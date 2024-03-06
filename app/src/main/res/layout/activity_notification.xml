@@ -40,8 +40,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/show_hide_action"
-        app:layout_constraintTop_toTopOf="@+id/rectangleLayout"
-        app:layout_constraintStart_toStartOf="@+id/rectangleLayout"/>
+        android:rotation="180"
+        app:layout_constraintTop_toTopOf="@id/rectangleLayout"
+        app:layout_constraintStart_toStartOf="@id/rectangleLayout"
+        app:layout_constraintBottom_toBottomOf="@id/rectangleLayout"/>
 
     <LinearLayout
         android:id="@+id/rectangleLayout"
