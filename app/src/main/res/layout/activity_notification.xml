@@ -31,14 +31,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/showPopupBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/showPopupBtn">
+        app:layout_constraintStart_toEndOf="@+id/showPopupBtn"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/showHideIMB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="-3dp"
+            android:layout_marginStart="@dimen/img_rect_margin"
             android:layout_marginBottom="25dp"
             android:rotation="180"
             android:src="@drawable/show_hide_action"
@@ -49,9 +51,9 @@
 
         <LinearLayout
             android:id="@+id/rectangleLayout"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
+            android:layout_width="@dimen/rect_width"
+            android:layout_height="@dimen/rect_height"
+            android:layout_margin="@dimen/stroke_margin"
             android:background="@drawable/hint_system_rectange"
             android:gravity="center_horizontal"
             android:orientation="vertical"
@@ -66,7 +68,7 @@
                 android:id="@+id/hint_titleTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/stroke_margin"
                 android:text="Text"
                 android:textColor="@color/black"
                 android:textSize="@dimen/title_hint_text_size" />
@@ -74,10 +76,10 @@
             <View
                 android:id="@+id/lineVW"
                 android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="@dimen/stroke_height"
+                android:layout_marginLeft="@dimen/stroke_margin"
+                android:layout_marginTop="@dimen/stroke_margin"
+                android:layout_marginRight="@dimen/stroke_margin"
                 android:background="@drawable/line_item"
                 app:layout_constraintBottom_toTopOf="@id/hint_titleTV"
                 app:layout_constraintEnd_toEndOf="@+id/rectangleLayout"
@@ -92,10 +94,9 @@
                 android:id="@+id/hint_descrTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/stroke_margin"
                 android:text="Text"
                 android:textColor="@color/black" />
-
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

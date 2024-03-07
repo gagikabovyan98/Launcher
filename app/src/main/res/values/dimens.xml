@@ -5,9 +5,10 @@
     <dimen name="rect_height">100dp</dimen>
     <dimen name="rect_main_margin">16dp</dimen>
     <dimen name="rect_start_margin">8dp</dimen>
-    <dimen name="title_hint_text_size">20sp</dimen>
+    <dimen name="title_hint_text_size">30sp</dimen>
     <dimen name="title_hint_bottom">35dp</dimen>
     <dimen name="line_view_height">2dp</dimen>
     <dimen name="stroke_height">1dp</dimen>
     <dimen name="stroke_margin">10dp</dimen>
+    <dimen name="img_rect_margin">3dp</dimen>
 </resources>

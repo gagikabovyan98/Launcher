@@ -34,24 +34,14 @@ class NotificationActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun updateUIHintText(hintTitle: String, descrHint: String, titleColor: Int, descrColor: Int) {
-        binding.hintTitleTV.text = hintTitle
-        binding.hintDescrTV.text = descrHint
-        binding.hintTitleTV.setTextColor(getColor(titleColor))
-        binding.hintDescrTV.setTextColor(getColor(descrColor))
-    }
-
     private fun createScaleXAnimator(): ValueAnimator {
-
         val startScaleX = if (isRectangleExpanded) 1f else 0.25f
         val endScaleX = if (isRectangleExpanded) 0.25f else 1f
-
         val pivotX = 1f
 
         val animator = ValueAnimator.ofFloat(startScaleX, endScaleX).apply {
             interpolator = AccelerateDecelerateInterpolator()
-            duration = 500
+            duration = 1000
             addUpdateListener {
                 val value = it.animatedValue as Float
                 binding.rectangleLayout.scaleX = value
@@ -70,7 +60,7 @@ class NotificationActivity : AppCompatActivity() {
 
         return ObjectAnimator.ofFloat(binding.showHideIMB, "rotation", rotationAngle).apply {
             interpolator = AccelerateDecelerateInterpolator()
-            duration = 500
+            duration = 1000
         }
     }
 
@@ -78,6 +68,13 @@ class NotificationActivity : AppCompatActivity() {
         binding.hintTitleTV.visibility = if (isRectangleExpanded) View.INVISIBLE else View.VISIBLE
         binding.hintDescrTV.visibility = if (isRectangleExpanded) View.INVISIBLE else View.VISIBLE
         binding.lineVW.visibility = if (isRectangleExpanded) View.INVISIBLE else View.VISIBLE
+    }
+
+    private fun updateUIHintText(hintTitle: String, descrHint: String, titleColor: Int, descrColor: Int) {
+        binding.hintTitleTV.text = hintTitle
+        binding.hintDescrTV.text = descrHint
+        binding.hintTitleTV.setTextColor(getColor(titleColor))
+        binding.hintDescrTV.setTextColor(getColor(descrColor))
     }
 
     private fun showPopup(view: View) {
