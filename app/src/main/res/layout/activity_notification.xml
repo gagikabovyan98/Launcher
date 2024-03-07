@@ -26,76 +26,77 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineVertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/guide_line_seperator" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/show_hide_action"
-        android:rotation="180"
-        app:layout_constraintTop_toTopOf="@id/rectangleLayout"
-        app:layout_constraintStart_toStartOf="@id/rectangleLayout"
-        app:layout_constraintBottom_toBottomOf="@id/rectangleLayout"/>
-
-    <LinearLayout
-        android:id="@+id/rectangleLayout"
-        android:layout_width="@dimen/rect_width"
-        android:layout_height="@dimen/rect_height"
-        android:layout_marginStart="@dimen/rect_start_margin"
-        android:layout_marginTop="@dimen/rect_main_margin"
-        android:layout_marginEnd="@dimen/rect_main_margin"
-        android:layout_marginBottom="@dimen/rect_main_margin"
-        android:background="@drawable/hint_system_rectange"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.899"
-        app:layout_constraintStart_toEndOf="@id/guidelineVertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.066">
+        app:layout_constraintStart_toEndOf="@+id/showPopupBtn">
 
-        <TextView
-            android:id="@+id/hint_titleTV"
+        <ImageButton
+            android:id="@+id/showHideIMB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="@dimen/title_hint_text_size"
-            android:text="Text"
-            android:layout_marginBottom="@dimen/title_hint_bottom"/>
+            android:layout_marginRight="-3dp"
+            android:layout_marginBottom="25dp"
+            android:rotation="180"
+            android:src="@drawable/show_hide_action"
+            app:layout_constraintBottom_toBottomOf="@id/rectangleLayout"
+            app:layout_constraintEnd_toStartOf="@+id/rectangleLayout"
+            app:layout_constraintTop_toTopOf="@id/rectangleLayout"
+            app:layout_constraintVertical_bias="1.0" />
 
-        <com.bignerdranch.android.launcherapp.customView.LineView
-            android:id="@+id/lineView"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/stroke_height"
-            android:layout_marginLeft="@dimen/stroke_margin"
-            android:layout_marginRight="@dimen/stroke_margin"
-            android:background="@color/line"
-            app:layout_constraintStart_toStartOf="@+id/rectangleLayout"
-            app:layout_constraintEnd_toEndOf="@+id/rectangleLayout"
-            app:layout_constraintTop_toTopOf="@+id/rectangleLayout"
-            app:layout_constraintBottom_toTopOf="@id/hint_titleTV"
-            app:layout_constraintWidth_percent="0.8"
-            app:layout_constraintHeight_default="percent"
-            app:layout_constraintHeight_percent="0.01"
-            app:layout_constraintHorizontal_bias="0.1"/>
+        <LinearLayout
+            android:id="@+id/rectangleLayout"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/hint_system_rectange"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.899"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.066">
 
-        <TextView
-            android:id="@+id/hint_descrTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Text"
-            android:textColor="@color/black"
-            android:layout_marginBottom="@dimen/title_hint_bottom"/>
+            <TextView
+                android:id="@+id/hint_titleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/title_hint_text_size" />
 
-    </LinearLayout>
+            <View
+                android:id="@+id/lineVW"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/line_item"
+                app:layout_constraintBottom_toTopOf="@id/hint_titleTV"
+                app:layout_constraintEnd_toEndOf="@+id/rectangleLayout"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="0.01"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/rectangleLayout"
+                app:layout_constraintTop_toTopOf="@+id/rectangleLayout"
+                app:layout_constraintWidth_percent="0.8" />
 
+            <TextView
+                android:id="@+id/hint_descrTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Text"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

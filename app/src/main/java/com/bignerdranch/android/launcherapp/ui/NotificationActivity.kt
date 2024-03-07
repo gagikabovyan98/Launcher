@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.bignerdranch.android.launcherapp.customView.CustomNotificationPopup
 import com.bignerdranch.android.launcherapp.databinding.ActivityNotificationBinding
 
@@ -21,7 +20,7 @@ class NotificationActivity : AppCompatActivity() {
         binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.imageButton.setOnClickListener {
+        binding.showHideIMB.setOnClickListener {
             val scaleXAnimator = createScaleXAnimator()
             val rotateAnimator = createRotateAnimator()
 
@@ -35,6 +34,7 @@ class NotificationActivity : AppCompatActivity() {
         }
     }
 
+
     private fun updateUIHintText(hintTitle: String, descrHint: String, titleColor: Int, descrColor: Int) {
         binding.hintTitleTV.text = hintTitle
         binding.hintDescrTV.text = descrHint
@@ -43,12 +43,13 @@ class NotificationActivity : AppCompatActivity() {
     }
 
     private fun createScaleXAnimator(): ValueAnimator {
+
         val startScaleX = if (isRectangleExpanded) 1f else 0.25f
         val endScaleX = if (isRectangleExpanded) 0.25f else 1f
 
         val pivotX = 1f
 
-        return ValueAnimator.ofFloat(startScaleX, endScaleX).apply {
+        val animator = ValueAnimator.ofFloat(startScaleX, endScaleX).apply {
             interpolator = AccelerateDecelerateInterpolator()
             duration = 500
             addUpdateListener {
@@ -56,18 +57,18 @@ class NotificationActivity : AppCompatActivity() {
                 binding.rectangleLayout.scaleX = value
                 binding.rectangleLayout.pivotX = binding.rectangleLayout.width * pivotX
 
-                // Обновляем позицию кнопки в соответствии с изменяющимся размером квадрата
-                val layoutParams = binding.imageButton.layoutParams as ConstraintLayout.LayoutParams
-                layoutParams.marginStart = ((1 - value) * 30).toInt() // Это только пример, вам может потребоваться другой способ рассчета положения
-                binding.imageButton.layoutParams = layoutParams
+                val translationX = (1 - value) * binding.rectangleLayout.width
+                binding.showHideIMB.translationX = translationX
             }
         }
+
+        return animator
     }
 
     private fun createRotateAnimator(): ObjectAnimator {
         val rotationAngle = if (isRectangleExpanded) 0f else 180f
 
-        return ObjectAnimator.ofFloat(binding.imageButton, "rotation", rotationAngle).apply {
+        return ObjectAnimator.ofFloat(binding.showHideIMB, "rotation", rotationAngle).apply {
             interpolator = AccelerateDecelerateInterpolator()
             duration = 500
         }
@@ -76,6 +77,7 @@ class NotificationActivity : AppCompatActivity() {
     private fun toggleHintVisibility() {
         binding.hintTitleTV.visibility = if (isRectangleExpanded) View.INVISIBLE else View.VISIBLE
         binding.hintDescrTV.visibility = if (isRectangleExpanded) View.INVISIBLE else View.VISIBLE
+        binding.lineVW.visibility = if (isRectangleExpanded) View.INVISIBLE else View.VISIBLE
     }
 
     private fun showPopup(view: View) {
