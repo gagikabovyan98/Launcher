@@ -20,7 +20,7 @@ class NotificationActivity : AppCompatActivity() {
         binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.showHideIMB.setOnClickListener {
+        binding.showHideIMV.setOnClickListener {
             val scaleXAnimator = createScaleXAnimator()
             val rotateAnimator = createRotateAnimator()
 
@@ -48,7 +48,7 @@ class NotificationActivity : AppCompatActivity() {
                 binding.rectangleLayout.pivotX = binding.rectangleLayout.width * pivotX
 
                 val translationX = (1 - value) * binding.rectangleLayout.width
-                binding.showHideIMB.translationX = translationX
+                binding.showHideIMV.translationX = translationX
             }
         }
 
@@ -58,7 +58,7 @@ class NotificationActivity : AppCompatActivity() {
     private fun createRotateAnimator(): ObjectAnimator {
         val rotationAngle = if (isRectangleExpanded) 0f else 180f
 
-        return ObjectAnimator.ofFloat(binding.showHideIMB, "rotation", rotationAngle).apply {
+        return ObjectAnimator.ofFloat(binding.showHideIMV, "rotation", rotationAngle).apply {
             interpolator = AccelerateDecelerateInterpolator()
             duration = 1000
         }

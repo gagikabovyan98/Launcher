@@ -36,12 +36,12 @@
         app:layout_constraintStart_toEndOf="@+id/showPopupBtn"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/showHideIMB"
+        <ImageView
+            android:id="@+id/showHideIMV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/img_rect_margin"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="@dimen/img_margin_center"
             android:rotation="180"
             android:src="@drawable/show_hide_action"
             app:layout_constraintBottom_toBottomOf="@id/rectangleLayout"
