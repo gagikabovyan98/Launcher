@@ -13,16 +13,14 @@ import androidx.core.view.isVisible
 import com.bignerdranch.android.launcherapp.R
 import com.bignerdranch.android.launcherapp.databinding.PopupSystemNotificationBinding
 import java.util.LinkedList
-import java.util.Queue
-import java.util.Stack
 
-internal class SystemNotificationPopup(
+private class SystemNotificationPopup(
     view: View,
     private val timer: Long,
     private val type: SystemNotificationTypes,
     private val description: String,
     private val onActionClicked: (() -> Unit)?,
-    private val onNotificationDismissed: () -> Unit,
+    private val onNotificationDismissed: (SystemNotificationPopup) -> Unit,
 ) : PopupWindow() {
     companion object {
         private const val TAG = "+++SystemNotificationPopup"
@@ -40,7 +38,7 @@ internal class SystemNotificationPopup(
         animationStyle = R.style.PopupAnimation
         showAtLocation(view, Gravity.BOTTOM, 0, 0)
         setOnDismissListener {
-            onNotificationDismissed.invoke()
+            onNotificationDismissed.invoke(this)
         }
 
         val alphaAnimation = AlphaAnimation(0f, 1f)
@@ -99,18 +97,20 @@ internal class SystemNotificationPopup(
         }
     }
 
+    fun getPopupHeight() = binding.root.measuredHeight
 }
 
-class SystemNotificationBuilder private constructor() {
+class SystemNotificationBuilder private constructor(private val view: View) {
     companion object {
-        const val MILLIS_IN_FUTURE = 20000L
+        private const val TAG = "+++SystemNotificationBuilder"
+        const val MILLIS_IN_FUTURE = 5000L
         const val COUNTDOWN_TIMER_INTERVAL = 100L
 
         private var instance: SystemNotificationBuilder? = null
 
-        fun getInstance(): SystemNotificationBuilder {
+        fun getInstance(view: View): SystemNotificationBuilder {
             if (instance == null) {
-                instance = SystemNotificationBuilder()
+                instance = SystemNotificationBuilder(view)
             }
 
             return instance!!
@@ -119,18 +119,55 @@ class SystemNotificationBuilder private constructor() {
 
     private val notifications = LinkedList<SystemNotificationItem>()
     private var showingNotifications = 0
+    private var topPopup: SystemNotificationPopup? = null
+    private var bottomPopup: SystemNotificationPopup? = null
 
-    fun showNotification(notification: SystemNotificationItem) {
+    fun addNotification(notification: SystemNotificationItem) {
         notifications.add(notification)
-        if (showingNotifications < 1) {
+        showNotification()
+    }
 
+    private fun showNotification() {
+        if (notifications.isNotEmpty() && showingNotifications < 2) {
+            val notification = notifications.poll() ?: return
+            showingNotifications++
+            topPopup = SystemNotificationPopup(
+                view,
+                type = notification.type,
+                timer = notification.timer,
+                description = notification.description,
+                onActionClicked = notification.onActionClicked,
+                onNotificationDismissed = {
+                    if (it == bottomPopup) {
+                        topPopup?.update(0, 0, topPopup!!.width, topPopup!!.height)
+                        bottomPopup = topPopup
+                    } else {
+                        topPopup = null
+                    }
+                    showingNotifications--
+                    showNotification()
+                }
+            )
+
+            if (bottomPopup == null) {
+                bottomPopup = topPopup
+                topPopup = null
+            } else {
+                topPopup!!.update(
+                    0,
+                    bottomPopup!!.getPopupHeight(),
+                    topPopup!!.width,
+                    topPopup!!.height
+                )
+            }
+        } else if (notifications.isEmpty()) {
+            if (showingNotifications == 1) {
+                topPopup?.update(0, 0, topPopup!!.width, topPopup!!.height)
+                bottomPopup = topPopup
+                topPopup = null
+            } else {
+                bottomPopup = null
+            }
         }
     }
 }
-
-data class SystemNotificationItem(
-    private val timer: Long = SystemNotificationBuilder.MILLIS_IN_FUTURE,
-    private val type: SystemNotificationTypes,
-    private val description: String,
-    private val onActionClicked: (() -> Unit)? = null,
-)
