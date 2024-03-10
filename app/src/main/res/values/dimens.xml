@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="zero_size">0dp</dimen>
-    <dimen name="rect_width">300dp</dimen>
-    <dimen name="rect_height">100dp</dimen>
-    <dimen name="rect_main_margin">16dp</dimen>
-    <dimen name="rect_start_margin">8dp</dimen>
-    <dimen name="title_hint_text_size">30sp</dimen>
-    <dimen name="title_hint_bottom">35dp</dimen>
+    <dimen name="rect_width">183dp</dimen>
+    <dimen name="rect_height">70dp</dimen>
+    <dimen name="title_hint_ts">11sp</dimen>
     <dimen name="line_view_height">2dp</dimen>
     <dimen name="stroke_height">1dp</dimen>
     <dimen name="stroke_margin">10dp</dimen>
-    <dimen name="img_rect_margin">3dp</dimen>
-    <dimen name="img_margin_center">32dp</dimen>
+    <dimen name="hint_description_ts">9sp</dimen>
+    <dimen name="accordion_background_width">12dp</dimen>
+    <dimen name="accordion_background_height">25dp</dimen>
 </resources>

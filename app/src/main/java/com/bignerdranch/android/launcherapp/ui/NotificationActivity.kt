@@ -20,7 +20,7 @@ class NotificationActivity : AppCompatActivity() {
         binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.showHideIMV.setOnClickListener {
+        binding.accordionVW.setOnClickListener {
             val scaleXAnimator = createScaleXAnimator()
             val rotateAnimator = createRotateAnimator()
 
@@ -35,8 +35,8 @@ class NotificationActivity : AppCompatActivity() {
     }
 
     private fun createScaleXAnimator(): ValueAnimator {
-        val startScaleX = if (isRectangleExpanded) 1f else 0.25f
-        val endScaleX = if (isRectangleExpanded) 0.25f else 1f
+        val startScaleX = if (isRectangleExpanded) 1f else 0.05f
+        val endScaleX = if (isRectangleExpanded) 0.05f else 1f
         val pivotX = 1f
 
         val animator = ValueAnimator.ofFloat(startScaleX, endScaleX).apply {
@@ -48,7 +48,7 @@ class NotificationActivity : AppCompatActivity() {
                 binding.rectangleLayout.pivotX = binding.rectangleLayout.width * pivotX
 
                 val translationX = (1 - value) * binding.rectangleLayout.width
-                binding.showHideIMV.translationX = translationX
+                binding.accordionVW.translationX = translationX
             }
         }
 
@@ -56,9 +56,9 @@ class NotificationActivity : AppCompatActivity() {
     }
 
     private fun createRotateAnimator(): ObjectAnimator {
-        val rotationAngle = if (isRectangleExpanded) 0f else 180f
+        val rotationAngle = if (isRectangleExpanded) 180f else 0f
 
-        return ObjectAnimator.ofFloat(binding.showHideIMV, "rotation", rotationAngle).apply {
+        return ObjectAnimator.ofFloat(binding.accordionIMV, "rotation", rotationAngle).apply {
             interpolator = AccelerateDecelerateInterpolator()
             duration = 1000
         }
@@ -77,11 +77,4 @@ class NotificationActivity : AppCompatActivity() {
         binding.hintDescrTV.setTextColor(getColor(descrColor))
     }
 
-    private fun showPopup(view: View) {
-        CustomNotificationPopup(
-            view,
-            title = "Системные уведомления",
-            description = "Здравствуйте! В городе введен режим",
-        )
-    }
 }
