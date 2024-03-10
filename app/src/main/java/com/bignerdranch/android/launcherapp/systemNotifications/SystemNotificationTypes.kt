@@ -39,6 +39,8 @@ sealed class SystemNotificationTypes(
         R.string.system_not_action,
     )
 
+    fun isAction() = this is Action
+
     companion object {
         private var index = 0
         fun getRegularType(): SystemNotificationTypes {

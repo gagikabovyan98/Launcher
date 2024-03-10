@@ -84,7 +84,7 @@ private class SystemNotificationPopup(
     }
 
     private fun clickListeners() {
-        if (onActionClicked == null) {
+        if (onActionClicked == null || !type.isAction()) {
             binding.actionBtn.isVisible = false
         } else {
             binding.actionBtn.isVisible = true

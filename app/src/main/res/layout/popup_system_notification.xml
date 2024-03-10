@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.7" />
 
     <LinearLayout
         android:id="@+id/textContainer"
@@ -28,10 +28,10 @@
         android:background="@drawable/rounded_top_rectangle_with_stroke"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingStart="35dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="30dp"
-        android:paddingBottom="20dp"
+        android:paddingStart="30dp"
+        android:paddingTop="@dimen/system_not_container_horizontal_padding"
+        android:paddingEnd="25dp"
+        android:paddingBottom="@dimen/system_not_container_horizontal_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft">
@@ -40,7 +40,8 @@
             android:id="@+id/titleTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="23sp"
+            android:layout_marginBottom="5dp"
+            android:textSize="15sp"
             android:textStyle="bold"
             tools:text="Успешно!"
             tools:textColor="@color/system_not_success" />
@@ -53,15 +54,15 @@
             android:lines="2"
             android:scrollHorizontally="false"
             android:textColor="@color/white"
-            android:textSize="19sp"
+            android:textSize="12sp"
             tools:text="Уважаемые игроки! Через 15 минут произойдет плановый рестарт сервера!" />
 
     </LinearLayout>
 
     <ImageView
         android:id="@+id/typeImv"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/system_not_image_size"
+        android:layout_height="@dimen/system_not_image_size"
         android:background="@drawable/rhombus"
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,9 +74,9 @@
 
     <FrameLayout
         android:id="@+id/actionBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
+        android:layout_width="@dimen/system_not_image_size"
+        android:layout_height="@dimen/system_not_image_size"
+        android:layout_marginStart="5dp"
         android:background="@drawable/half_transparent_and_stroke_background"
         android:gravity="center"
         android:padding="15dp"
