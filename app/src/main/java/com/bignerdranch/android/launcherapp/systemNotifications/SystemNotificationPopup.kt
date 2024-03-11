@@ -24,6 +24,7 @@ private class SystemNotificationPopup(
 ) : PopupWindow() {
     companion object {
         private const val TAG = "+++SystemNotificationPopup"
+        const val BOTTOM_MARGIN = 30
     }
 
     private var countDownTimer: CountDownTimer? = null
@@ -36,7 +37,7 @@ private class SystemNotificationPopup(
         height = ViewGroup.LayoutParams.WRAP_CONTENT
         width = ViewGroup.LayoutParams.MATCH_PARENT
         animationStyle = R.style.PopupAnimation
-        showAtLocation(view, Gravity.BOTTOM, 0, 0)
+        showAtLocation(view, Gravity.BOTTOM, 0, BOTTOM_MARGIN)
         setOnDismissListener {
             onNotificationDismissed.invoke(this)
         }
@@ -72,7 +73,7 @@ private class SystemNotificationPopup(
         countDownTimer =
             object : CountDownTimer(timer, SystemNotificationBuilder.COUNTDOWN_TIMER_INTERVAL) {
                 override fun onTick(millisUntilFinished: Long) {
-                    val progress = 100 - (millisUntilFinished.toFloat() / timer * 100).toInt()
+                    val progress = 110 - (millisUntilFinished.toFloat() / timer * 100).toInt()
                     binding.progressBar.setProgress(progress, true)
                 }
 
@@ -88,12 +89,24 @@ private class SystemNotificationPopup(
             binding.actionBtn.isVisible = false
         } else {
             binding.actionBtn.isVisible = true
-            binding.actionBtn.setOnClickListener {
-                countDownTimer?.cancel()
-                countDownTimer = null
-                onActionClicked.invoke()
-                dismiss()
+            binding.actionBtn.setOnBounceClickListener {
+                object : CountDownTimer(10, 10) {
+                    override fun onTick(millisUntilFinished: Long) {}
+
+                    override fun onFinish() {
+                        countDownTimer?.cancel()
+                        countDownTimer = null
+                        onActionClicked.invoke()
+                        dismiss()
+                    }
+                }.start()
             }
+        }
+
+        binding.textContainer.setOnClickListener {
+            countDownTimer?.cancel()
+            countDownTimer = null
+            dismiss()
         }
     }
 
@@ -139,7 +152,12 @@ class SystemNotificationBuilder private constructor(private val view: View) {
                 onActionClicked = notification.onActionClicked,
                 onNotificationDismissed = {
                     if (it == bottomPopup) {
-                        topPopup?.update(0, 0, topPopup!!.width, topPopup!!.height)
+                        topPopup?.update(
+                            0,
+                            SystemNotificationPopup.BOTTOM_MARGIN,
+                            topPopup!!.width,
+                            topPopup!!.height
+                        )
                         bottomPopup = topPopup
                     } else {
                         topPopup = null
@@ -155,14 +173,19 @@ class SystemNotificationBuilder private constructor(private val view: View) {
             } else {
                 topPopup!!.update(
                     0,
-                    bottomPopup!!.getPopupHeight(),
+                    bottomPopup!!.getPopupHeight() + SystemNotificationPopup.BOTTOM_MARGIN * 2,
                     topPopup!!.width,
                     topPopup!!.height
                 )
             }
         } else if (notifications.isEmpty()) {
             if (showingNotifications == 1) {
-                topPopup?.update(0, 0, topPopup!!.width, topPopup!!.height)
+                topPopup?.update(
+                    0,
+                    SystemNotificationPopup.BOTTOM_MARGIN,
+                    topPopup!!.width,
+                    topPopup!!.height
+                )
                 bottomPopup = topPopup
                 topPopup = null
             } else {
