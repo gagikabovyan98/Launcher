@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.NotificationActivity">
 
-    <Button
-        android:id="@+id/showPopupBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="show popup"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="@dimen/zero_size"
@@ -82,8 +72,13 @@
                 android:id="@+id/hint_titleTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/stroke_margin"
+                android:layout_marginTop="5dp"
                 android:gravity="center_horizontal"
+                android:shadowColor="@color/title"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:fontFamily="@font/gilroy_bold"
                 android:text="@string/hint_title"
                 android:textColor="@color/title"
                 android:textSize="@dimen/title_hint_ts" />
@@ -93,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/stroke_height"
                 android:layout_marginLeft="@dimen/stroke_margin"
-                android:layout_marginTop="@dimen/stroke_margin"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="@dimen/stroke_margin"
                 android:background="@drawable/line_item"
                 app:layout_constraintBottom_toTopOf="@id/hint_titleTV"
@@ -112,9 +107,10 @@
                 android:layout_margin="@dimen/stroke_height"
                 android:ellipsize="end"
                 android:gravity="center_horizontal"
+                android:fontFamily="@font/gilroy_semibold"
                 android:text="@string/hint_description"
                 android:textColor="@color/white"
-                android:textSize="@dimen/hint_description_ts" />
+                android:textSize="@dimen/hint_description_ts"/>
 
         </LinearLayout>
 

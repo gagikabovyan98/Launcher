@@ -1,5 +1,7 @@
 package com.bignerdranch.android.launcherapp.ui
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
@@ -7,6 +9,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.animation.doOnEnd
+import com.bignerdranch.android.launcherapp.R
 import com.bignerdranch.android.launcherapp.customView.CustomNotificationPopup
 import com.bignerdranch.android.launcherapp.databinding.ActivityNotificationBinding
 
@@ -24,33 +28,43 @@ class NotificationActivity : AppCompatActivity() {
             val scaleXAnimator = createScaleXAnimator()
             val rotateAnimator = createRotateAnimator()
 
-            AnimatorSet().apply {
+            val animatorSet = AnimatorSet().apply {
                 playTogether(scaleXAnimator, rotateAnimator)
                 start()
             }
 
-            toggleHintVisibility()
-            isRectangleExpanded = !isRectangleExpanded
+            if (isRectangleExpanded) toggleHintVisibility()
+            animatorSet.addListener(object : AnimatorListenerAdapter() {
+
+                override fun onAnimationEnd(animation: Animator) {
+                    toggleHintVisibility()
+                    isRectangleExpanded = !isRectangleExpanded
+                }
+            })
         }
     }
 
     private fun createScaleXAnimator(): ValueAnimator {
-        val startScaleX = if (isRectangleExpanded) 1f else 0.05f
-        val endScaleX = if (isRectangleExpanded) 0.05f else 1f
-        val pivotX = 1f
 
-        val animator = ValueAnimator.ofFloat(startScaleX, endScaleX).apply {
+        val startWidth = binding.rectangleLayout.width.toFloat()
+        val endWidth =
+            if (isRectangleExpanded) 30f else resources.getDimensionPixelSize(R.dimen.rect_width).toFloat()
+
+        val animator = ValueAnimator.ofFloat(startWidth, endWidth).apply {
             interpolator = AccelerateDecelerateInterpolator()
             duration = 1000
             addUpdateListener {
                 val value = it.animatedValue as Float
-                binding.rectangleLayout.scaleX = value
-                binding.rectangleLayout.pivotX = binding.rectangleLayout.width * pivotX
-
-                val translationX = (1 - value) * binding.rectangleLayout.width
-                binding.accordionVW.translationX = translationX
+                binding.rectangleLayout.layoutParams.width = value.toInt()
+                binding.rectangleLayout.requestLayout()
             }
         }
+
+        animator.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                toggleHintVisibility()
+            }
+        })
 
         return animator
     }
@@ -70,7 +84,12 @@ class NotificationActivity : AppCompatActivity() {
         binding.lineVW.visibility = if (isRectangleExpanded) View.INVISIBLE else View.VISIBLE
     }
 
-    private fun updateUIHintText(hintTitle: String, descrHint: String, titleColor: Int, descrColor: Int) {
+    private fun updateUIHintText(
+        hintTitle: String,
+        descrHint: String,
+        titleColor: Int,
+        descrColor: Int
+    ) {
         binding.hintTitleTV.text = hintTitle
         binding.hintDescrTV.text = descrHint
         binding.hintTitleTV.setTextColor(getColor(titleColor))
