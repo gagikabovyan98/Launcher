@@ -69,12 +69,17 @@ private class SystemNotificationPopup(
         binding.typeImv.setImageResource(type.iconRes)
     }
 
+    private val animationDuration = 1000
+
     private fun startLoading() {
         countDownTimer =
-            object : CountDownTimer(timer, SystemNotificationBuilder.COUNTDOWN_TIMER_INTERVAL) {
+            object : CountDownTimer(timer + animationDuration, SystemNotificationBuilder.COUNTDOWN_TIMER_INTERVAL) {
                 override fun onTick(millisUntilFinished: Long) {
-                    val progress = 110 - (millisUntilFinished.toFloat() / timer * 100).toInt()
-                    binding.progressBar.setProgress(progress, true)
+                    if (millisUntilFinished > animationDuration / 2 && millisUntilFinished < timer - animationDuration / 3) {
+                        val progress = ((millisUntilFinished.toFloat() - animationDuration / 2) / timer * 100).toInt()
+                        binding.progressBar.setProgress(progress, true)
+                    }
+
                 }
 
                 override fun onFinish() {
@@ -89,7 +94,7 @@ private class SystemNotificationPopup(
             binding.actionBtn.isVisible = false
         } else {
             binding.actionBtn.isVisible = true
-            binding.actionBtn.setOnBounceClickListener {
+            binding.actionBtn.setOnClickListener {
                 object : CountDownTimer(10, 10) {
                     override fun onTick(millisUntilFinished: Long) {}
 

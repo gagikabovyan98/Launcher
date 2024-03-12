@@ -99,11 +99,12 @@
         android:id="@+id/progress_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:progress="100"
         app:indicatorColor="@color/system_not_success"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textContainer"
         app:layout_constraintStart_toStartOf="@+id/textContainer"
-        app:trackColor="#33FFFFFF"
+        app:trackColor="#80FFFFFF"
         app:trackCornerRadius="10dp"
         app:trackThickness="5dp"
         tools:progress="10" />
