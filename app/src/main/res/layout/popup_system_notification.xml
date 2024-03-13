@@ -65,8 +65,6 @@
         android:id="@+id/typeImv"
         android:layout_width="@dimen/system_not_image_size"
         android:layout_height="@dimen/system_not_image_size"
-        android:background="@drawable/rhombus"
-        android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textContainer"
         app:layout_constraintStart_toStartOf="@+id/textContainer"
@@ -74,38 +72,40 @@
         tools:backgroundTint="@color/system_not_success"
         tools:src="@drawable/system_not_success" />
 
-    <com.bignerdranch.android.launcherapp.customView.BounceFrameLayout
+    <com.bignerdranch.android.launcherapp.customView.BounceImage
         android:id="@+id/actionBtn"
         android:layout_width="@dimen/system_not_image_size"
         android:layout_height="@dimen/system_not_image_size"
         android:layout_marginStart="8dp"
-        android:background="@drawable/half_transparent_and_stroke_background"
+        android:src="@drawable/system_not_action_btn"
         android:gravity="center"
-        android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textContainer"
-        app:layout_constraintTop_toTopOf="@+id/textContainer">
+        app:layout_constraintTop_toTopOf="@+id/textContainer"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/system_not_action_btn"
-            app:tint="@color/white" />
-
-    </com.bignerdranch.android.launcherapp.customView.BounceFrameLayout>
+    <View
+        android:layout_width="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textContainer"
+        app:layout_constraintStart_toStartOf="@+id/textContainer"
+        android:background="#80FFFFFF"
+        android:layout_marginBottom="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_height="6dp"/>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progress_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:progress="100"
+        android:layout_margin="1dp"
         app:indicatorColor="@color/system_not_success"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textContainer"
         app:layout_constraintStart_toStartOf="@+id/textContainer"
-        app:trackColor="#80FFFFFF"
-        app:trackCornerRadius="10dp"
+        app:trackColor="#00FFFFFF"
+        app:trackCornerRadius="0dp"
         app:trackThickness="5dp"
         tools:progress="10" />
 

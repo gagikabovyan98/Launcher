@@ -1,6 +1,5 @@
 package com.bignerdranch.android.launcherapp.systemNotifications
 
-import android.content.res.ColorStateList
 import android.os.CountDownTimer
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -57,8 +56,6 @@ private class SystemNotificationPopup(
         val color = ContextCompat.getColor(contentView.context, type.color)
         binding.titleTxt.setTextColor(color)
         binding.progressBar.setIndicatorColor(color)
-        val colorStateList = ColorStateList.valueOf(color)
-        binding.typeImv.backgroundTintList = colorStateList
     }
 
     private fun setImage() {
@@ -90,16 +87,10 @@ private class SystemNotificationPopup(
         } else {
             binding.actionBtn.isVisible = true
             binding.actionBtn.setOnClickListener {
-                object : CountDownTimer(10, 10) {
-                    override fun onTick(millisUntilFinished: Long) {}
-
-                    override fun onFinish() {
-                        countDownTimer?.cancel()
-                        countDownTimer = null
-                        onActionClicked.invoke()
-                        dismiss()
-                    }
-                }.start()
+                countDownTimer?.cancel()
+                countDownTimer = null
+                onActionClicked.invoke()
+                dismiss()
             }
         }
 
