@@ -6,7 +6,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
 import android.widget.PopupWindow
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -42,9 +41,6 @@ private class SystemNotificationPopup(
             onNotificationDismissed.invoke(this)
         }
 
-        val alphaAnimation = AlphaAnimation(0f, 1f)
-        alphaAnimation.duration = 500
-        binding.root.startAnimation(alphaAnimation)
         setTexts()
         setColors()
         startLoading()
@@ -79,7 +75,6 @@ private class SystemNotificationPopup(
                         val progress = ((millisUntilFinished.toFloat() - animationDuration / 2) / timer * 100).toInt()
                         binding.progressBar.setProgress(progress, true)
                     }
-
                 }
 
                 override fun onFinish() {
