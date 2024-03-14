@@ -44,6 +44,9 @@
             android:fontFamily="@font/gilroy_bold"
             android:textSize="13sp"
             android:textStyle="bold"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
             tools:text="Успешно!"
             tools:textColor="@color/system_not_success" />
 
@@ -65,6 +68,7 @@
         android:id="@+id/typeImv"
         android:layout_width="@dimen/system_not_image_size"
         android:layout_height="@dimen/system_not_image_size"
+        android:paddingStart="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textContainer"
         app:layout_constraintStart_toStartOf="@+id/textContainer"
@@ -92,7 +96,7 @@
         android:layout_marginBottom="1dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_height="6dp"/>
+        android:layout_height="3dp"/>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progress_bar"
@@ -106,7 +110,7 @@
         app:layout_constraintStart_toStartOf="@+id/textContainer"
         app:trackColor="#00FFFFFF"
         app:trackCornerRadius="0dp"
-        app:trackThickness="5dp"
+        app:trackThickness="2dp"
         tools:progress="10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
