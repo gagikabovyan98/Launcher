@@ -22,13 +22,13 @@ class NotificationActivity : AppCompatActivity() {
     }
 
     private fun clickListeners() {
-        binding.showPopupBtn.setOnClickListener {
+        binding.showPopupButton.setOnClickListener {
             showPopup()
         }
     }
 
     private fun showPopup() {
-        systemNotificationBuilder.addNotification(
+        systemNotificationBuilder.showNotification(
             notification = SystemNotificationItem(
                 type = SystemNotificationTypes.getRegularType(),
                 description = "Уважаемые игроки! Через 15 минут произойдет плановый рестарт сервера!",

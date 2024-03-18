@@ -14,7 +14,7 @@ import java.util.LinkedList
 
 private class SystemNotificationPopup(
     view: View,
-    private val timer: Long,
+    private val timeToDismiss: Long,
     private val type: SystemNotificationTypes,
     private val description: String,
     private val onActionClicked: (() -> Unit)?,
@@ -48,28 +48,28 @@ private class SystemNotificationPopup(
     }
 
     private fun setTexts() {
-        binding.titleTxt.setText(type.title)
-        binding.descriptionTxt.text = description
+        binding.titleTextView.setText(type.title)
+        binding.descriptionTextView.text = description
     }
 
     private fun setColors() {
         val color = ContextCompat.getColor(contentView.context, type.color)
-        binding.titleTxt.setTextColor(color)
+        binding.titleTextView.setTextColor(color)
         binding.progressBar.setIndicatorColor(color)
     }
 
     private fun setImage() {
-        binding.typeImv.setImageResource(type.iconRes)
+        binding.typeImageView.setImageResource(type.iconRes)
     }
 
     private val animationDuration = 1000
 
     private fun startLoading() {
         countDownTimer =
-            object : CountDownTimer(timer + animationDuration, SystemNotificationBuilder.COUNTDOWN_TIMER_INTERVAL) {
+            object : CountDownTimer(timeToDismiss + animationDuration, SystemNotificationBuilder.COUNTDOWN_TIMER_INTERVAL) {
                 override fun onTick(millisUntilFinished: Long) {
-                    if (millisUntilFinished > animationDuration / 2 && millisUntilFinished < timer - animationDuration / 3) {
-                        val progress = ((millisUntilFinished.toFloat() - animationDuration / 2) / timer * 100).toInt()
+                    if (millisUntilFinished > animationDuration / 2 && millisUntilFinished < timeToDismiss - animationDuration / 3) {
+                        val progress = ((millisUntilFinished.toFloat() - animationDuration / 2) / timeToDismiss * 100).toInt()
                         binding.progressBar.setProgress(progress, true)
                     }
                 }
@@ -83,10 +83,10 @@ private class SystemNotificationPopup(
 
     private fun clickListeners() {
         if (onActionClicked == null || !type.isAction()) {
-            binding.actionBtn.isVisible = false
+            binding.actionButton.isVisible = false
         } else {
-            binding.actionBtn.isVisible = true
-            binding.actionBtn.setOnClickListener {
+            binding.actionButton.isVisible = true
+            binding.actionButton.setOnClickListener {
                 countDownTimer?.cancel()
                 countDownTimer = null
                 onActionClicked.invoke()
@@ -112,13 +112,10 @@ class SystemNotificationBuilder private constructor(private val view: View) {
 
         private var instance: SystemNotificationBuilder? = null
 
-        fun getInstance(view: View): SystemNotificationBuilder {
-            if (instance == null) {
-                instance = SystemNotificationBuilder(view)
-            }
-
-            return instance!!
+        fun getInstance(view: View) = instance ?: SystemNotificationBuilder(view).also {
+            instance = it
         }
+
     }
 
     private val notifications = LinkedList<SystemNotificationItem>()
@@ -126,7 +123,7 @@ class SystemNotificationBuilder private constructor(private val view: View) {
     private var topPopup: SystemNotificationPopup? = null
     private var bottomPopup: SystemNotificationPopup? = null
 
-    fun addNotification(notification: SystemNotificationItem) {
+    fun showNotification(notification: SystemNotificationItem) {
         notifications.add(notification)
         showNotification()
     }
@@ -138,17 +135,20 @@ class SystemNotificationBuilder private constructor(private val view: View) {
             topPopup = SystemNotificationPopup(
                 view,
                 type = notification.type,
-                timer = notification.timer,
+                timeToDismiss = notification.timer,
                 description = notification.description,
                 onActionClicked = notification.onActionClicked,
-                onNotificationDismissed = {
-                    if (it == bottomPopup) {
-                        topPopup?.update(
-                            0,
-                            SystemNotificationPopup.BOTTOM_MARGIN,
-                            topPopup!!.width,
-                            topPopup!!.height
-                        )
+                onNotificationDismissed = { systemNotificationPopup ->
+                    if (systemNotificationPopup == bottomPopup) {
+                        topPopup?.let {
+                            it.update(
+                                0,
+                                SystemNotificationPopup.BOTTOM_MARGIN,
+                                it.width,
+                                it.height
+                            )
+                        }
+
                         bottomPopup = topPopup
                     } else {
                         topPopup = null
@@ -162,21 +162,25 @@ class SystemNotificationBuilder private constructor(private val view: View) {
                 bottomPopup = topPopup
                 topPopup = null
             } else {
-                topPopup!!.update(
-                    0,
-                    bottomPopup!!.getPopupHeight() + SystemNotificationPopup.BOTTOM_MARGIN * 2,
-                    topPopup!!.width,
-                    topPopup!!.height
-                )
+                topPopup?.let {
+                    it.update(
+                        0,
+                        bottomPopup!!.getPopupHeight() + SystemNotificationPopup.BOTTOM_MARGIN * 2,
+                        it.width,
+                        it.height
+                    )
+                }
             }
         } else if (notifications.isEmpty()) {
             if (showingNotifications == 1) {
-                topPopup?.update(
-                    0,
-                    SystemNotificationPopup.BOTTOM_MARGIN,
-                    topPopup!!.width,
-                    topPopup!!.height
-                )
+                topPopup?.let {
+                    it.update(
+                        0,
+                        SystemNotificationPopup.BOTTOM_MARGIN,
+                        it.width,
+                        it.height
+                    )
+                }
                 bottomPopup = topPopup
                 topPopup = null
             } else {

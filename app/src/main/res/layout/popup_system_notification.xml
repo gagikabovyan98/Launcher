@@ -8,21 +8,21 @@
 
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineLeft"
+        android:id="@+id/guideline_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.32" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineRight"
+        android:id="@+id/guideline_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.68" />
 
     <LinearLayout
-        android:id="@+id/textContainer"
+        android:id="@+id/text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_top_rectangle_with_stroke"
@@ -33,11 +33,11 @@
         android:paddingEnd="25dp"
         android:paddingBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft">
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left">
 
         <TextView
-            android:id="@+id/titleTxt"
+            android:id="@+id/title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -51,7 +51,7 @@
             tools:textColor="@color/system_not_success" />
 
         <TextView
-            android:id="@+id/descriptionTxt"
+            android:id="@+id/description_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -65,33 +65,33 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/typeImv"
+        android:id="@+id/type_image_view"
         android:layout_width="@dimen/system_not_image_size"
         android:layout_height="@dimen/system_not_image_size"
         android:paddingStart="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textContainer"
-        app:layout_constraintStart_toStartOf="@+id/textContainer"
-        app:layout_constraintTop_toTopOf="@+id/textContainer"
+        app:layout_constraintEnd_toStartOf="@+id/text_container"
+        app:layout_constraintStart_toStartOf="@+id/text_container"
+        app:layout_constraintTop_toTopOf="@+id/text_container"
         tools:backgroundTint="@color/system_not_success"
         tools:src="@drawable/system_not_success" />
 
     <com.bignerdranch.android.launcherapp.customView.BounceImage
-        android:id="@+id/actionBtn"
+        android:id="@+id/action_button"
         android:layout_width="@dimen/system_not_image_size"
         android:layout_height="@dimen/system_not_image_size"
         android:layout_marginStart="8dp"
         android:src="@drawable/system_not_action_btn"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textContainer"
-        app:layout_constraintTop_toTopOf="@+id/textContainer"/>
+        app:layout_constraintStart_toEndOf="@+id/text_container"
+        app:layout_constraintTop_toTopOf="@+id/text_container"/>
 
     <View
         android:layout_width="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textContainer"
-        app:layout_constraintStart_toStartOf="@+id/textContainer"
+        app:layout_constraintEnd_toEndOf="@+id/text_container"
+        app:layout_constraintStart_toStartOf="@+id/text_container"
         android:background="#80FFFFFF"
         android:layout_marginBottom="1dp"
         android:layout_marginStart="1dp"
@@ -106,8 +106,8 @@
         android:layout_margin="1dp"
         app:indicatorColor="@color/system_not_success"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textContainer"
-        app:layout_constraintStart_toStartOf="@+id/textContainer"
+        app:layout_constraintEnd_toEndOf="@+id/text_container"
+        app:layout_constraintStart_toStartOf="@+id/text_container"
         app:trackColor="#00FFFFFF"
         app:trackCornerRadius="0dp"
         app:trackThickness="2dp"
